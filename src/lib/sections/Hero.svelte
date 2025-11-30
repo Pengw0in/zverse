@@ -32,10 +32,10 @@
 
   .hero-wrapper {
     text-align: left;
-    max-width: 800px;
+    max-width: 900px;
     width: 100%;
     align-self: flex-start;
-    margin-left: 4rem; 
+    margin-left: 12rem;
   }
 
   h1 {
@@ -77,16 +77,26 @@
     line-height: 1.6;
   }
 
-  .container {
-    text-align: left;
-    padding: 2rem;
-    max-width: 800px;
-    margin-left: 6rem; /* Shift entire container right */
+  @media (max-width: 1200px) {
+    .hero-wrapper {
+      margin-left: 8rem;
+    }
   }
 
   @media (max-width: 768px) {
-    .container {
-      margin-left: 0; /* Reset on mobile */
+    .hero-wrapper {
+      margin-left: 2rem;
+      max-width: 100%;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 12vw, 8rem);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-wrapper {
+      margin-left: 1rem;
     }
   }
 </style>

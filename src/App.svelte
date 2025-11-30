@@ -1,36 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import BayerBackground from './lib/BayerBackground.svelte';
   import Header from './lib/Header.svelte';
   import EmailSidebar from './lib/EmailSidebar.svelte';
-  import Section from './lib/Section.svelte';
-  
-  import Hero from './lib/sections/Hero.svelte';
-  import Playbook from './lib/sections/Projects.svelte';
-  import Writeups from './lib/sections/Writeups.svelte';
-  import Contacts from './lib/sections/Contacts.svelte';
-  import WriteupDetail from './lib/sections/WriteupDetail.svelte';
-  
-  let currentRoute = $state<{ page: 'home' | 'writeup' | 'writeups'; slug?: string }>({ page: 'home' });
-  
-  function navigate() {
-    const hash = window.location.hash;
-    
-    if (hash.startsWith('#/writeups/')) {
-      const slug = decodeURIComponent(hash.replace('#/writeups/', ''));
-      currentRoute = { page: 'writeup', slug };
-    } else if (hash === '#/writeups') {
-      currentRoute = { page: 'writeups' };
-    } else {
-      currentRoute = { page: 'home' };
-    }
-  }
-  
-  onMount(() => {
-    navigate();
-    window.addEventListener('hashchange', navigate);
-    return () => window.removeEventListener('hashchange', navigate);
-  });
+  import Router from './lib/Router.svelte';
 </script>
 
 <svelte:head>
@@ -42,29 +14,7 @@
 <EmailSidebar />
 
 <main>
-  {#if currentRoute.page === 'home'}
-    <Section id="hero">
-      <Hero />
-    </Section>
-
-    <Section id="playbook">
-      <Playbook />
-    </Section>
-
-    <Section id="writeups">
-      <Writeups />
-    </Section>
-
-    <Section id="contacts">
-      <Contacts />
-    </Section>
-  {:else if currentRoute.page === 'writeups'}
-    <Section id="writeups">
-      <Writeups />
-    </Section>
-  {:else if currentRoute.page === 'writeup' && currentRoute.slug}
-    <WriteupDetail slug={currentRoute.slug} />
-  {/if}
+  <Router />
 </main>
 
 <style>

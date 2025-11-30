@@ -4,11 +4,13 @@
   let { 
     text, 
     hoverOnly = false,
-    intensity = 'normal' as 'subtle' | 'normal' | 'intense'
+    intensity = 'normal' as 'subtle' | 'normal' | 'intense',
+    halftone = true
   } = $props<{ 
     text: string; 
     hoverOnly?: boolean;
     intensity?: 'subtle' | 'normal' | 'intense';
+    halftone?: boolean;
   }>();
   
   let glitchActive = $state(false);
@@ -60,6 +62,7 @@
   class:subtle={intensity === 'subtle'}
   class:normal={intensity === 'normal'}
   class:intense={intensity === 'intense'}
+  class:halftone-enabled={halftone}
   role="presentation"
   onmouseenter={() => isHovered = true}
   onmouseleave={() => isHovered = false}
@@ -69,7 +72,9 @@
   <span class="text-glitch magenta" aria-hidden="true">{text}</span>
   <span class="text-glitch yellow" aria-hidden="true">{text}</span>
   <span class="text-glitch red" aria-hidden="true">{text}</span>
-  <span class="halftone" aria-hidden="true">{text}</span>
+  {#if halftone}
+    <span class="halftone" aria-hidden="true">{text}</span>
+  {/if}
   <span class="scanlines" aria-hidden="true"></span>
 </span>
 
@@ -198,7 +203,7 @@
     animation: scanline-move 0.08s linear infinite;
   }
 
-  .glitch-wrapper.active .halftone {
+  .glitch-wrapper.active.halftone-enabled .halftone {
     animation: halftone-shift 0.1s steps(2) infinite;
   }
 
