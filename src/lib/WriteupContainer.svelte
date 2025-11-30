@@ -1,8 +1,43 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  
   let { children } = $props();
+  let headerHidden = $state(false);
+  let scrollContainer: HTMLElement | null = null;
+  let lastScrollY = $state(0);
+
+  onMount(() => {
+    const handleScroll = () => {
+      if (!scrollContainer) return;
+      const currentScrollY = scrollContainer.scrollTop;
+      
+      // Hide header area when scrolled down past 100px
+      if (currentScrollY > 100) {
+        headerHidden = true;
+      } else {
+        headerHidden = false;
+      }
+      
+      lastScrollY = currentScrollY;
+    };
+
+    // Get the scroll container after mount
+    setTimeout(() => {
+      scrollContainer = document.querySelector('.writeup-scroll-container');
+      if (scrollContainer) {
+        scrollContainer.addEventListener('scroll', handleScroll);
+      }
+    }, 50);
+
+    return () => {
+      if (scrollContainer) {
+        scrollContainer.removeEventListener('scroll', handleScroll);
+      }
+    };
+  });
 </script>
 
-<div class="writeup-page">
+<div class="writeup-page" class:header-hidden={headerHidden}>
   <div class="writeup-scroll-container">
     <div class="writeup-content-wrapper">
       {@render children()}
@@ -19,9 +54,14 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-top: 6rem;
+    padding-top: 5rem;
     box-sizing: border-box;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    transition: padding-top 0.3s ease;
+  }
+
+  .writeup-page.header-hidden {
+    padding-top: 1rem;
   }
 
   .writeup-scroll-container {
@@ -137,12 +177,6 @@
     font-size: 0.9rem;
     line-height: 1.6;
     color: #adb5bd;
-  }
-
-  /* Terminal prompt styling */
-  .writeup-content-wrapper :global(.content pre code .prompt),
-  .writeup-content-wrapper :global(.content pre code)::first-line {
-    color: #FFD700;
   }
 
   .writeup-content-wrapper :global(.content strong) {
@@ -262,6 +296,10 @@
   @media (max-width: 768px) {
     .writeup-page {
       padding-top: 4rem;
+    }
+
+    .writeup-page.header-hidden {
+      padding-top: 0.5rem;
     }
 
     .writeup-scroll-container {

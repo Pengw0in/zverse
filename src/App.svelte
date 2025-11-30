@@ -2,6 +2,7 @@
   import BayerBackground from './lib/BayerBackground.svelte';
   import Header from './lib/Header.svelte';
   import EmailSidebar from './lib/EmailSidebar.svelte';
+  import CreditsLink from './lib/CreditsLink.svelte';
   import Router from './lib/Router.svelte';
 </script>
 
@@ -12,6 +13,7 @@
 <BayerBackground pixelSize={4} bg="#000000" blur={1} />
 <Header />
 <EmailSidebar />
+<CreditsLink />
 
 <main>
   <Router />

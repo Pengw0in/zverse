@@ -122,11 +122,13 @@
 
   header.writeup-mode {
     mix-blend-mode: normal;
+    background: transparent;
   }
 
   header.hidden {
     transform: translateY(-100%);
     opacity: 0;
+    pointer-events: none;
   }
 
   nav {
@@ -135,6 +137,10 @@
     align-items: center;
     width: 100%;
     pointer-events: auto;
+  }
+
+  header.hidden nav {
+    pointer-events: none;
   }
 
   a {
