@@ -1,0 +1,7 @@
+<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0H500V500H0V0Z" fill="#D9D9D9"/>
+<path d="M0 0H250V250H0V0Z" fill="#00AEEF"/>
+<path d="M250 0H500V250H250V0Z" fill="#FFD700"/>
+<path d="M250 250H500V500H250V250Z" fill="#9C27B0"/>
+<path d="M0 250H250V500H0V250Z" fill="#FF0000"/>
+</svg>
