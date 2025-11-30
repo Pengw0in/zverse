@@ -9,7 +9,6 @@
   let loading = $state(true);
 
   onMount(async () => {
-    // Load writeups from markdown files
     writeups = await getWriteups();
     loading = false;
 
@@ -31,7 +30,7 @@
   });
 </script>
 
-<div class="container" id="socials">
+<div class="container" id="writeups">
   <h2>Writeups</h2>
   <p class="subtitle">CTF solutions & security research</p>
   
@@ -60,7 +59,7 @@
   .container {
     text-align: center;
     padding: 4rem 2rem;
-    max-width: 1600px; /* Increased from 1400px */
+    max-width: 1600px;
     margin: 0 auto;
     height: 100%;
     display: flex;
@@ -86,9 +85,8 @@
     overflow-y: auto;
     overflow-x: hidden;
     padding: 1rem 0.5rem;
-    max-height: 70vh; /* Increased from 60vh */
+    max-height: 70vh;
     
-    /* Custom scrollbar */
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0) transparent;
   }
@@ -114,10 +112,10 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 3rem;
-    padding-bottom: 4rem; /* Increased from 2rem */
+    padding-bottom: 4rem;
   }
 
-  @media (max-width: 1400px) { /* Added new breakpoint */
+  @media (max-width: 1400px) {
     .writeups-grid {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -129,7 +127,7 @@
     }
 
     .writeups-scroll-container {
-      max-height: 55vh; /* Increased from 50vh */
+      max-height: 55vh;
     }
 
     .writeups-grid {

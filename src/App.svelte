@@ -7,19 +7,20 @@
   
   import Hero from './lib/sections/Hero.svelte';
   import Playbook from './lib/sections/Projects.svelte';
-  import Socials from './lib/sections/Writeups.svelte';
+  import Writeups from './lib/sections/Writeups.svelte';
   import Contacts from './lib/sections/Contacts.svelte';
   import WriteupDetail from './lib/sections/WriteupDetail.svelte';
   
-  let currentRoute = $state<{ page: 'home' | 'writeup'; slug?: string }>({ page: 'home' });
+  let currentRoute = $state<{ page: 'home' | 'writeup' | 'writeups'; slug?: string }>({ page: 'home' });
   
   function navigate() {
     const hash = window.location.hash;
     
     if (hash.startsWith('#/writeups/')) {
-      // Decode the slug to handle spaces and special characters
       const slug = decodeURIComponent(hash.replace('#/writeups/', ''));
       currentRoute = { page: 'writeup', slug };
+    } else if (hash === '#/writeups') {
+      currentRoute = { page: 'writeups' };
     } else {
       currentRoute = { page: 'home' };
     }
@@ -50,12 +51,16 @@
       <Playbook />
     </Section>
 
-    <Section id="socials">
-      <Socials />
+    <Section id="writeups">
+      <Writeups />
     </Section>
 
     <Section id="contacts">
       <Contacts />
+    </Section>
+  {:else if currentRoute.page === 'writeups'}
+    <Section id="writeups">
+      <Writeups />
     </Section>
   {:else if currentRoute.page === 'writeup' && currentRoute.slug}
     <WriteupDetail slug={currentRoute.slug} />

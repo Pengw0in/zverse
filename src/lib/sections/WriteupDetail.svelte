@@ -101,7 +101,7 @@
   });
   
   function goBack() {
-    window.location.hash = '#socials';
+    window.location.hash = '#/writeups';
   }
 </script>
 

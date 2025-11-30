@@ -76,4 +76,17 @@
     opacity: 0.8;
     line-height: 1.6;
   }
+
+  .container {
+    text-align: left;
+    padding: 2rem;
+    max-width: 800px;
+    margin-left: 6rem; /* Shift entire container right */
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      margin-left: 0; /* Reset on mobile */
+    }
+  }
 </style>

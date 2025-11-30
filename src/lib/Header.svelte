@@ -10,7 +10,7 @@
     <a href="#playbook">
       <GlitchText text="PROJECTS" hoverOnly={true} intensity="subtle" />
     </a>
-    <a href="#socials">
+    <a href="#writeups">
       <GlitchText text="WRITEUPS" hoverOnly={true} intensity="subtle" />
     </a>
     <a href="#contacts">
