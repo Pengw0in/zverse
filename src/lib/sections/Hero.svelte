@@ -5,9 +5,9 @@
 
 <div class="hero-wrapper">
   <h1>
-    <GlitchText text="WEB APPLICATION" /> <br>
-    <GlitchText text="PENETRATION" /> <br>
-    <GlitchText text="TESTER." />
+    <GlitchText text="WEB APPLICATION" intensity="normal" /> <br>
+    <GlitchText text="PENETRATION" intensity="normal" /> <br>
+    <GlitchText text="TESTER." intensity="normal" />
   </h1>
   
   <div class="content">
@@ -24,7 +24,7 @@
 <style>
   @font-face {
     font-family: 'CustomHeaderFont';
-    src: url('/Redig-Oblique.woff') format('woff'); /* Replace with your file name */
+    src: url('/Redig-Oblique.woff') format('woff'); 
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -34,8 +34,8 @@
     text-align: left;
     max-width: 800px;
     width: 100%;
-    align-self: flex-start; /* Align to the left */
-    margin-left: 4rem; /* Add left margin to match header padding */
+    align-self: flex-start;
+    margin-left: 4rem; 
   }
 
   h1 {

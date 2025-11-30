@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import BayerBackground from './lib/BayerBackground.svelte';
   import Header from './lib/Header.svelte';
   import EmailSidebar from './lib/EmailSidebar.svelte';
@@ -8,6 +9,27 @@
   import Playbook from './lib/sections/Projects.svelte';
   import Socials from './lib/sections/Writeups.svelte';
   import Contacts from './lib/sections/Contacts.svelte';
+  import WriteupDetail from './lib/sections/WriteupDetail.svelte';
+  
+  let currentRoute = $state<{ page: 'home' | 'writeup'; slug?: string }>({ page: 'home' });
+  
+  function navigate() {
+    const hash = window.location.hash;
+    
+    if (hash.startsWith('#/writeups/')) {
+      // Decode the slug to handle spaces and special characters
+      const slug = decodeURIComponent(hash.replace('#/writeups/', ''));
+      currentRoute = { page: 'writeup', slug };
+    } else {
+      currentRoute = { page: 'home' };
+    }
+  }
+  
+  onMount(() => {
+    navigate();
+    window.addEventListener('hashchange', navigate);
+    return () => window.removeEventListener('hashchange', navigate);
+  });
 </script>
 
 <svelte:head>
@@ -19,21 +41,25 @@
 <EmailSidebar />
 
 <main>
-  <Section id="hero">
-    <Hero />
-  </Section>
+  {#if currentRoute.page === 'home'}
+    <Section id="hero">
+      <Hero />
+    </Section>
 
-  <Section id="playbook">
-    <Playbook />
-  </Section>
+    <Section id="playbook">
+      <Playbook />
+    </Section>
 
-  <Section id="socials">
-    <Socials />
-  </Section>
+    <Section id="socials">
+      <Socials />
+    </Section>
 
-  <Section id="contacts">
-    <Contacts />
-  </Section>
+    <Section id="contacts">
+      <Contacts />
+    </Section>
+  {:else if currentRoute.page === 'writeup' && currentRoute.slug}
+    <WriteupDetail slug={currentRoute.slug} />
+  {/if}
 </main>
 
 <style>

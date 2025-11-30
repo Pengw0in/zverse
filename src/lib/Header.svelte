@@ -1,13 +1,21 @@
 <script lang="ts">
-  // No logic needed for now
+  import GlitchText from './GlitchText.svelte';
 </script>
 
 <header>
   <nav>
-    <a href="/" class="logo">ZENDEXVERSE</a>
-    <a href="#playbook">PROJECTS</a>
-    <a href="#socials">WRITEUPS</a>
-    <a href="#contacts">CONTACTS</a>
+    <button class="logo" onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+      <GlitchText text="ZENDEXVERSE" hoverOnly={true} intensity="subtle" />
+    </button>
+    <a href="#playbook">
+      <GlitchText text="PROJECTS" hoverOnly={true} intensity="subtle" />
+    </a>
+    <a href="#socials">
+      <GlitchText text="WRITEUPS" hoverOnly={true} intensity="subtle" />
+    </a>
+    <a href="#contacts">
+      <GlitchText text="CONTACTS" hoverOnly={true} intensity="subtle" />
+    </a>
   </nav>
 </header>
 
@@ -22,7 +30,7 @@
     z-index: 50;
     mix-blend-mode: difference;
     color: white;
-    pointer-events: none; /* Let clicks pass through empty space to the background */
+    pointer-events: none;
     box-sizing: border-box;
   }
 
@@ -31,7 +39,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    pointer-events: auto; /* Re-enable clicks */
+    pointer-events: auto;
   }
 
   a {
@@ -42,22 +50,19 @@
     font-size: 0.8rem;
     font-weight: 400;
     letter-spacing: 0.05em;
-    opacity: 0.9;
-    transition: opacity 0.2s ease;
   }
 
-  a:hover {
-    opacity: 1;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  /* Specific styling for the logo link */
-  a.logo {
+  button.logo {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
     font-weight: 600;
     font-size: 1rem;
     letter-spacing: 0.02em;
-    opacity: 1;
     margin-left: 2rem;
   }
 
@@ -71,6 +76,10 @@
     
     nav {
       gap: 2rem;
+    }
+
+    button.logo {
+      margin-left: 0;
     }
   }
 </style>

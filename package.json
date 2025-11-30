@@ -19,6 +19,8 @@
     "vite": "^7.2.4"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
+    "navaid": "^1.2.0",
     "three": "^0.181.2"
   }
 }
