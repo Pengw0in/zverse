@@ -3,6 +3,7 @@
   import Header from './lib/Header.svelte';
   import EmailSidebar from './lib/EmailSidebar.svelte';
   import CreditsLink from './lib/CreditsLink.svelte';
+  import CustomCursor from './lib/CustomCursor.svelte';
   import Router from './lib/Router.svelte';
 </script>
 
@@ -14,6 +15,7 @@
 <Header />
 <EmailSidebar />
 <CreditsLink />
+<CustomCursor />
 
 <main>
   <Router />
