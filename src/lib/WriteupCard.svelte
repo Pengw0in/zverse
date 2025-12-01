@@ -3,6 +3,7 @@
     writeup, 
     isGlitching = false,
     isHovered = false,
+    colorIndex = 0,
     onMouseEnter,
     onMouseLeave
   } = $props<{
@@ -16,29 +17,50 @@
     };
     isGlitching?: boolean;
     isHovered?: boolean;
+    colorIndex?: number;
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
   }>();
+
+  // Theme colors from your palette
+  const themeColors = ['#00AEEF', '#9C27B0', '#FFD700', '#FF0000'];
+  const accentColor = themeColors[colorIndex % themeColors.length];
 </script>
 
 <a 
   href={`#/writeups/${writeup.slug}`}
   class="writeup-card"
   class:glitching={isGlitching}
+  style="--accent-color: {accentColor}"
   onmouseenter={onMouseEnter}
   onmouseleave={onMouseLeave}
 >
-  <div class="category">{writeup.category}</div>
-  <h3 class="title">{writeup.title}</h3>
-  <p class="description">{writeup.description}</p>
-  
-  <div class="meta">
+  <!-- Top Section: Date/Meta -->
+  <div class="card-header">
     <span class="date">{writeup.date}</span>
-    <div class="tags">
-      {#each writeup.tags as tag}
-        <span class="tag">{tag}</span>
-      {/each}
+  </div>
+
+  <!-- Middle Section: Title & Arrow -->
+  <div class="card-body">
+    <h3 class="title">{writeup.title}</h3>
+    <div class="arrow">→</div>
+  </div>
+
+  <!-- Dots indicator -->
+  <div class="dots">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+  
+  <!-- Bottom Section: Category & Button -->
+  <div class="card-footer">
+    <div class="category-wrapper">
+      <span class="category-dot"></span>
+      <span class="category-name">{writeup.category}</span>
     </div>
+    <span class="view-btn">View</span>
   </div>
 </a>
 
@@ -46,94 +68,188 @@
   .writeup-card {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    width: 280px;
+    height: 420px;
     padding: 2rem;
-    background: rgba(0, 0, 0, 0.8);
-    border: 2px solid white;
+    background: #161616;
+    border-radius: 24px;
     text-decoration: none;
     color: white;
-    transition: all 0.2s ease;
-    gap: 1rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
   .writeup-card:hover {
-    background: rgba(0, 0, 0, 0.95);
-    transform: translate(-4px, -4px);
-    box-shadow: 4px 4px 0 #00AEEF;
+    transform: translateY(-8px);
+    background: #1a1a1a;
+    border-color: var(--accent-color);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 30px color-mix(in srgb, var(--accent-color) 20%, transparent);
   }
 
-  .category {
-    display: inline-block;
-    align-self: flex-start;
-    padding: 0.3rem 0.8rem;
-    background: rgba(255, 215, 0, 0.2);
-    border: 1px solid #FFD700;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .title {
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin: 0;
-    line-height: 1.2;
-  }
-
-  .description {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    opacity: 0.8;
-    margin: 0;
-  }
-
-  .meta {
+  /* Header */
+  .card-header {
     display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
   .date {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.85rem;
-    opacity: 0.6;
+    color: var(--accent-color);
+    font-weight: 500;
+    opacity: 0.8;
   }
 
-  .tags {
+  /* Body */
+  .card-body {
+    flex: 1;
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding: 1.5rem 0;
   }
 
-  .tag {
-    padding: 0.25rem 0.6rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    font-size: 0.7rem;
+  .title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+    color: #fff;
+    max-width: 85%;
+    letter-spacing: -0.02em;
+  }
+
+  .arrow {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    color: var(--accent-color);
+  }
+
+  .writeup-card:hover .arrow {
+    opacity: 1;
+    transform: translate(5px, -50%);
+  }
+
+  /* Dots */
+  .dots {
+    display: flex;
+    gap: 6px;
+    padding: 1rem 0;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: background 0.3s ease;
+  }
+
+  .dot:first-child {
+    background: var(--accent-color);
+  }
+
+  .writeup-card:hover .dot:nth-child(2) {
+    background: var(--accent-color);
+    opacity: 0.7;
+  }
+
+  .writeup-card:hover .dot:nth-child(3) {
+    background: var(--accent-color);
+    opacity: 0.5;
+  }
+
+  /* Footer */
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .category-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .category-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-color);
+  }
+
+  .category-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #888;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
-  /* Simple glitch effect */
+  .view-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.6rem 1.4rem;
+    border-radius: 100px;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .writeup-card:hover .view-btn {
+    background: var(--accent-color);
+    color: black;
+    border-color: var(--accent-color);
+  }
+
+  /* Glitch effect adaptation */
   .writeup-card.glitching {
-    animation: simple-glitch 0.3s ease;
+    border-color: var(--accent-color);
+    animation: shake 0.2s ease-in-out infinite;
+  }
+  
+  .writeup-card.glitching .title {
+    text-shadow: 2px 0 #FF0000, -2px 0 #00AEEF;
   }
 
-  @keyframes simple-glitch {
-    0%, 100% { transform: translate(0); }
-    25% { transform: translate(-2px, 2px); }
-    50% { transform: translate(2px, -2px); }
-    75% { transform: translate(-2px, -2px); }
+  @keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
   }
-
+  
   @media (max-width: 768px) {
     .writeup-card {
-      padding: 1.5rem;
+      width: 100%;
+      height: 380px;
     }
 
     .title {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
     }
   }
 </style>

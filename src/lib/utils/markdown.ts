@@ -66,7 +66,7 @@ export async function getWriteups(): Promise<WriteupMetadata[]> {
 
         
         const { data } = parseFrontmatter(content);
-        const slug = path.split('/').pop()?.replace('.md', '') || '';
+        const slug = decodeURIComponent(path.split('/').pop()?.replace('.md', '') || '');
 
         writeups.push({
           title: data.title || 'Untitled',

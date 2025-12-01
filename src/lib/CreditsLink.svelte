@@ -2,7 +2,7 @@
 </script>
 
 <a 
-  href="https://tympanus.net/Tutorials/BayerDithering/" 
+  href="https://tympanus.net/codrops/2025/07/30/interactive-webgl-backgrounds-a-quick-guide-to-bayer-dithering/"
   target="_blank" 
   rel="noopener noreferrer"
   class="credits-link"

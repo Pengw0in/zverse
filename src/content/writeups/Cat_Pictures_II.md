@@ -1,10 +1,12 @@
 ---
-title: SQL Injection in Login Form
-description: Deep dive into exploiting SQL injection vulnerabilities
-date: 2024-01-15
+title: Cat Pictures II
+description: TryHackMe Room
+date: 2025-08-02
 category: Web Security
-tags: [SQL, Web, OWASP Top 10]
+tags: [writeups]
 ---
+
+<img src="/writeups/catpictures2/1.png" alt="Challenge Screenshot" width="700">
 
 Cat Pictures II is a room from TryHackMe. In this writeup, let's see how we can solve this room.
 
@@ -25,6 +27,7 @@ After letting the command run for a while, we get:
 
 So, we can see that a web service is being hosted. Upon visiting that website, we get to know that it is a cat picture album.
 
+<img src="/writeups/catpictures2/album.png" alt="Challenge Screenshot" width="700">
 
 After inspecting these images, we can see something fishy in the description of image 1.
 
@@ -58,7 +61,7 @@ So from this we have credentials to the Gitea portal. We also have Ansible runni
 First, let's visit the Gitea portal. On the Gitea portal we can find one repository named ansible - perhaps we can find a configuration file there.
 
 Well, after checking the repo, we can find the first flag!
-
+<img src="/writeups/catpictures2/repo.png" alt="Challenge Screenshot" width="700">
 
 we also find a YAML config file:
 ```yaml
@@ -120,5 +123,6 @@ nc -lnvp <ATTACKER-PORT>
 Then visit port 1337 and run the playbook. Boom! We get a reverse connection. After checking the files on the system, we can find second flag!
 
 for the 
+
 
 

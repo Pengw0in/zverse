@@ -36,6 +36,11 @@
     width: 100%;
     align-self: flex-start;
     margin-left: 12rem;
+    margin-top: 6rem;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
   }
 
   h1 {
@@ -80,12 +85,14 @@
   @media (max-width: 1200px) {
     .hero-wrapper {
       margin-left: 8rem;
+      margin-top: 4rem;
     }
   }
 
   @media (max-width: 768px) {
     .hero-wrapper {
       margin-left: 2rem;
+      margin-top: 3rem;
       max-width: 100%;
     }
 
@@ -97,6 +104,7 @@
   @media (max-width: 480px) {
     .hero-wrapper {
       margin-left: 1rem;
+      margin-top: 2rem;
     }
   }
 </style>
