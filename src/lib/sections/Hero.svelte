@@ -13,7 +13,7 @@
   <div class="content">
     <h2>Hi! I'm Lohith Srikar.</h2>
     <p class="lead">
-      I do cybersecurity stuff and code a lot. Breaking things, fixing them, and writing about them.
+      I'm into web technologies: I design and build websites and test their security.
     </p>
     <p class="details">
       This site has some CTF writeups, projects I have done in free time, and whatever else I find worth sharing.
@@ -34,9 +34,9 @@
     text-align: left;
     max-width: 900px;
     width: 100%;
-    align-self: flex-start;
-    margin-left: 12rem;
-    margin-top: 6rem;
+    margin-left: 0; 
+    transform: translate(-10vw, 3vh);
+    
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -84,15 +84,13 @@
 
   @media (max-width: 1200px) {
     .hero-wrapper {
-      margin-left: 8rem;
-      margin-top: 4rem;
+      padding-left: 6rem;
     }
   }
 
   @media (max-width: 768px) {
     .hero-wrapper {
-      margin-left: 2rem;
-      margin-top: 3rem;
+      padding-left: 6rem;
       max-width: 100%;
     }
 
@@ -103,8 +101,7 @@
 
   @media (max-width: 480px) {
     .hero-wrapper {
-      margin-left: 1rem;
-      margin-top: 2rem;
+      padding-left: 1.5rem;
     }
   }
 </style>

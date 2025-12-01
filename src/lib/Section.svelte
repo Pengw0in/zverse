@@ -44,19 +44,17 @@
     padding: 4rem 2rem;
     box-sizing: border-box;
     
-    /* Simple fade and slide up animation */
+    /* Optimized animation: Removed transform to fix lag with mix-blend-mode */
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, 
-                transform 0.6s ease-out;
+    /* transform: translateY(30px);  <-- This caused the lag */
+    transition: opacity 0.8s ease-out;
 
     /* Visuals */
     color: white;
     mix-blend-mode: difference;
     pointer-events: auto;
     
-    /* Add will-change for smoother animations */
-    will-change: opacity, transform;
+    will-change: opacity;
   }
 
   section.no-blend {
