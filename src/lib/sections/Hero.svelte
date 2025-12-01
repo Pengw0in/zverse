@@ -16,7 +16,7 @@
       I'm into web technologies: I design and build websites and test their security.
     </p>
     <p class="details">
-      This site has some CTF writeups, projects I have done in free time, and whatever else I find worth sharing.
+      This site is my personal site for sharing writeups, milestones, projects, and anything I find interesting.
     </p>
   </div>
 </div>
@@ -31,11 +31,11 @@
   }
 
   .hero-wrapper {
-    text-align: left;
+    text-align: center;
     max-width: 900px;
     width: 100%;
     margin-left: 0; 
-    transform: translate(-10vw, 3vh);
+    transform: translate(0vw, 0vh);
     
     user-select: none;
     -webkit-user-select: none;
@@ -55,7 +55,8 @@
 
   .content {
     max-width: 600px;
-    text-align: left;
+    margin: 0 auto;
+    text-align: center;
   }
 
   h2 {
@@ -82,16 +83,9 @@
     line-height: 1.6;
   }
 
-  @media (max-width: 1200px) {
-    .hero-wrapper {
-      padding-left: 6rem;
-    }
-  }
-
   @media (max-width: 768px) {
     .hero-wrapper {
-      padding-left: 6rem;
-      max-width: 100%;
+      padding: 0 1.5rem;
     }
 
     h1 {
@@ -101,7 +95,7 @@
 
   @media (max-width: 480px) {
     .hero-wrapper {
-      padding-left: 1.5rem;
+      padding: 0 1rem;
     }
   }
 </style>

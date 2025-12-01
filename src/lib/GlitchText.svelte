@@ -28,7 +28,7 @@
     intense: { duration: [200, 400], frequency: 0.5, interval: [1000, 1500], displacement: 1.5 }
   };
 
-  const settings = intensityMap[intensity];
+  const settings = intensityMap[intensity as 'subtle' | 'normal' | 'intense'];
 
   onMount(() => {
     if (hoverOnly) return;

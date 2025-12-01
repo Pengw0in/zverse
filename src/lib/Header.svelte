@@ -14,58 +14,33 @@
 
   function handleScroll() {
     if (!scrollContainer) return;
-    
     const currentScrollY = scrollContainer.scrollTop;
     
-    // Show header when scrolling up
     if (currentScrollY < lastScrollY) {
       isVisible = true;
-      
-      // Clear existing timeout
-      if (hideTimeout) {
-        clearTimeout(hideTimeout);
-      }
-      
-      // Hide after 2 seconds of no scroll activity
+      if (hideTimeout) clearTimeout(hideTimeout);
       hideTimeout = setTimeout(() => {
-        if (currentScrollY > 100) {
-          isVisible = false;
-        }
+        if (currentScrollY > 100) isVisible = false;
       }, 2000);
-    } 
-    // Hide when scrolling down past 100px
-    else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+    } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
       isVisible = false;
-      if (hideTimeout) {
-        clearTimeout(hideTimeout);
-      }
+      if (hideTimeout) clearTimeout(hideTimeout);
     }
-    
     lastScrollY = currentScrollY;
   }
 
   function checkRoute() {
     isWriteupPage = window.location.hash.startsWith('#/writeups/');
-    
-    // Reset visibility when route changes
     isVisible = true;
     lastScrollY = 0;
-    
-    if (hideTimeout) {
-      clearTimeout(hideTimeout);
-    }
+    if (hideTimeout) clearTimeout(hideTimeout);
 
-    // Find the scroll container for writeup pages
     setTimeout(() => {
       if (isWriteupPage) {
         scrollContainer = document.querySelector('.writeup-scroll-container');
-        if (scrollContainer) {
-          scrollContainer.addEventListener('scroll', handleScroll);
-        }
+        if (scrollContainer) scrollContainer.addEventListener('scroll', handleScroll);
       } else {
-        if (scrollContainer) {
-          scrollContainer.removeEventListener('scroll', handleScroll);
-        }
+        if (scrollContainer) scrollContainer.removeEventListener('scroll', handleScroll);
         scrollContainer = null;
       }
     }, 100);
@@ -74,15 +49,10 @@
   onMount(() => {
     checkRoute();
     window.addEventListener('hashchange', checkRoute);
-
     return () => {
       window.removeEventListener('hashchange', checkRoute);
-      if (scrollContainer) {
-        scrollContainer.removeEventListener('scroll', handleScroll);
-      }
-      if (hideTimeout) {
-        clearTimeout(hideTimeout);
-      }
+      if (scrollContainer) scrollContainer.removeEventListener('scroll', handleScroll);
+      if (hideTimeout) clearTimeout(hideTimeout);
     };
   });
 </script>
@@ -92,14 +62,17 @@
     <button class="logo" onclick={goHome}>
       <GlitchText text="ZENDEXVERSE" hoverOnly={true} intensity="subtle" halftone={false}/>
     </button>
-    <a href="#/playbook">
-      <GlitchText text="PROJECTS" hoverOnly={true} intensity="subtle" halftone={false}/>
+    <a href="#/about">
+      <GlitchText text="ABOUT" hoverOnly={true} intensity="subtle" halftone={false}/>
     </a>
     <a href="#/writeups">
       <GlitchText text="WRITEUPS" hoverOnly={true} intensity="subtle" halftone={false}/>
     </a>
-    <a href="#/contacts">
-      <GlitchText text="CONTACTS" hoverOnly={true} intensity="subtle" halftone={false}/>
+    <a href="#/projects">
+      <GlitchText text="PROJECTS" hoverOnly={true} intensity="subtle" halftone={false}/>
+    </a>
+    <a href="#/milestones">
+      <GlitchText text="MILESTONES" hoverOnly={true} intensity="subtle" halftone={false}/>
     </a>
   </nav>
 </header>
@@ -137,6 +110,7 @@
     align-items: center;
     width: 100%;
     pointer-events: auto;
+    gap: 2rem;
   }
 
   header.hidden nav {
@@ -174,11 +148,9 @@
       gap: 1rem;
       align-items: center;
     }
-    
     nav {
       gap: 2rem;
     }
-
     button.logo {
       margin-left: 0;
     }
